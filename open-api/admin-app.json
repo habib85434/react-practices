@@ -1,0 +1,3077 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "Admin/Super Admin"
+  },
+  "host": "localhost",
+  "basePath": "/v1",
+  "tags": [
+    {
+      "name": "company",
+      "description": "Company apis"
+    },
+    {
+      "name": "branch",
+      "description": "branch apis"
+    },
+    {
+      "name": "kitchen",
+      "description": "kitcens apis"
+    },
+    {
+      "name": "table",
+      "description": "table apis"
+    },
+    {
+      "name": "food_category",
+      "description": "food_category apis"
+    },
+    {
+      "name": "food_item",
+      "description": "food_item apis"
+    },
+    {
+      "name": "menu",
+      "description": "menu apis"
+    },
+    {
+      "name": "menu_item_opt_slot",
+      "description": "menu_item_opt_slot apis"
+    },
+    {
+      "name": "operation_slot",
+      "description": "operation_slot apis"
+    },
+    {
+      "name": "choices_category",
+      "description": "choices_category apis"
+    },
+    {
+      "name": "choices_item",
+      "description": "choices_item apis"
+    },
+    {
+      "name": "choices_item_opt_slot",
+      "description": "choices_item_opt_slot apis"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/company": {
+      "post": {
+        "tags": [
+          "company"
+        ],
+        "summary": "Add a new company",
+        "description": "",
+        "operationId": "addcompany",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "company object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/company"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "company"
+        ],
+        "summary": "Update an existing company",
+        "description": "",
+        "operationId": "updatecompany",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "company object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/company"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "company not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/company/{companyId}": {
+      "get": {
+        "tags": [
+          "company"
+        ],
+        "summary": "Find company by ID",
+        "description": "Returns a single company",
+        "operationId": "getcompanyById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "ID of company to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/company"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "company not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "company"
+        ],
+        "summary": "Updates a company",
+        "description": "",
+        "operationId": "updatecompanyWithForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "ID of company that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "company"
+        ],
+        "summary": "Deletes a company",
+        "description": "",
+        "operationId": "deletecompany",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "company id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "company not found"
+          }
+        }
+      }
+    },
+    "/company/{companyId}/branches": {
+      "get": {
+        "tags": [
+          "company"
+        ],
+        "summary": "Get all branches by company id",
+        "description": "Returns all branches by a company",
+        "operationId": "getbranchescompanyById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "ID of company to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/branch"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "company not found"
+          }
+        }
+      }
+    },
+    "/company/{companyId}/kitchens": {
+      "get": {
+        "tags": [
+          "company"
+        ],
+        "summary": "Get all kitchens by company id",
+        "description": "Returns all kitchens by company id",
+        "operationId": "getallkitechenscompanyById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "ID of company to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/kitchen"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "company not found"
+          }
+        }
+      }
+    },
+    "/company/{companyId}/food_categories": {
+      "get": {
+        "tags": [
+          "company"
+        ],
+        "summary": "Get food_categories by comp id",
+        "description": "Returns food_categories by comp id",
+        "operationId": "getallfoodcategoriscompanyById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "ID of company to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/food_category"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "company not found"
+          }
+        }
+      }
+    },
+    "/company/{companyId}/menus": {
+      "get": {
+        "tags": [
+          "company"
+        ],
+        "summary": "Get all menus by company id",
+        "description": "Returns all menus by company",
+        "operationId": "getallfoodmenuscompanyById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "ID of company to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/menu"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "company not found"
+          }
+        }
+      }
+    },
+    "/company/{companyId}/choices_categories": {
+      "get": {
+        "tags": [
+          "company"
+        ],
+        "summary": "Get all choices_categories by company id",
+        "description": "Returns all choices_categories by company",
+        "operationId": "getallchoices_categoriesCompanyById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "ID of company to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/choices_category"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "company not found"
+          }
+        }
+      }
+    },
+    "/company/{companyId}/opt_slots": {
+      "get": {
+        "tags": [
+          "company"
+        ],
+        "summary": "Get all opt_slots by company id",
+        "description": "Returns all opt_slots by company",
+        "operationId": "getallopt_slotsCompanyById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "ID of company to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/operation_slot"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "company not found"
+          }
+        }
+      }
+    },
+    "/company/{companyId}/table": {
+      "get": {
+        "tags": [
+          "company"
+        ],
+        "summary": "Get all tables by company id",
+        "description": "Returns all tables by company",
+        "operationId": "getTablesCompanyById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "ID of company to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/table"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "company not found"
+          }
+        }
+      }
+    },
+    "/branch": {
+      "post": {
+        "tags": [
+          "branch"
+        ],
+        "summary": "Add a new branch",
+        "description": "",
+        "operationId": "addbranch",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "branch object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/branch"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "branch"
+        ],
+        "summary": "Update an existing branch",
+        "description": "",
+        "operationId": "updateBranch",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "branch object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/branch"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "branch not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/branch/{branchId}": {
+      "get": {
+        "tags": [
+          "branch"
+        ],
+        "summary": "Find branch by ID",
+        "description": "Returns a single branch",
+        "operationId": "getBranchById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "branchId",
+            "in": "path",
+            "description": "ID of branch to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/branch"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "branch not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "branch"
+        ],
+        "summary": "Updates a branch",
+        "description": "",
+        "operationId": "updateBranchForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "branchId",
+            "in": "path",
+            "description": "ID of branch that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "branch"
+        ],
+        "summary": "Deletes a branch",
+        "description": "",
+        "operationId": "deleteBranch",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "branchId",
+            "in": "path",
+            "description": "branch id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "branch not found"
+          }
+        }
+      }
+    },
+    "/branch/{branchId}/sales": {
+      "get": {
+        "tags": [
+          "branch"
+        ],
+        "summary": "Get all sales by branchId",
+        "description": "Returns all sales by branchId",
+        "operationId": "getSalesBybranchId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "branchId",
+            "in": "path",
+            "description": "ID of branch to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/sale"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "branch not found"
+          }
+        }
+      }
+    },
+    "/branch/{branchId}/tables": {
+      "get": {
+        "tags": [
+          "branch"
+        ],
+        "summary": "Get all tables by branchId",
+        "description": "Returns all tables by branchId",
+        "operationId": "getallTalesBranhId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "branchId",
+            "in": "path",
+            "description": "ID of branch to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/table"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "branch not found"
+          }
+        }
+      }
+    },
+    "/branch/{branchId}/menus": {
+      "get": {
+        "tags": [
+          "branch"
+        ],
+        "summary": "Get all menus by branchId",
+        "description": "Returns all menus by branchId",
+        "operationId": "getallMenusByBranchId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "branchId",
+            "in": "path",
+            "description": "ID of branch to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/menu"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "branch not found"
+          }
+        }
+      }
+    },
+    "/kitchen": {
+      "post": {
+        "tags": [
+          "kitchen"
+        ],
+        "summary": "Add a new kitchen",
+        "description": "",
+        "operationId": "addKitchen",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "kitchen object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/kitchen"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "kitchen"
+        ],
+        "summary": "Update an existing kitchen",
+        "description": "",
+        "operationId": "updateKitchen",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "kitchen object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/kitchen"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "kitchen not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/kitchen/{kitchenId}": {
+      "get": {
+        "tags": [
+          "kitchen"
+        ],
+        "summary": "Find kitchen by ID",
+        "description": "Returns a single kitchen",
+        "operationId": "getkitchenById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "kitchenId",
+            "in": "path",
+            "description": "ID of kitchen to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/kitchen"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "kitchen not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "kitchen"
+        ],
+        "summary": "Updates a kitchen",
+        "description": "",
+        "operationId": "updatekitchenForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "kitchenId",
+            "in": "path",
+            "description": "ID of kitchen that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "kitchen"
+        ],
+        "summary": "Deletes a kitchen",
+        "description": "",
+        "operationId": "deletekitchen",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "kitchenId",
+            "in": "path",
+            "description": "kitchen id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "kitchen not found"
+          }
+        }
+      }
+    },
+    "/table": {
+      "post": {
+        "tags": [
+          "table"
+        ],
+        "summary": "Add a new table",
+        "description": "",
+        "operationId": "addtable",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "table object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/table"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "table"
+        ],
+        "summary": "Update an existing table",
+        "description": "",
+        "operationId": "updatetable",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "table object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/table"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "table not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/table/{tableId}": {
+      "get": {
+        "tags": [
+          "table"
+        ],
+        "summary": "Find table by ID",
+        "description": "Returns a single table",
+        "operationId": "gettableById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "ID of table to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/table"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "table not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "table"
+        ],
+        "summary": "Updates a table",
+        "description": "",
+        "operationId": "updatetableForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "ID of table that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "table"
+        ],
+        "summary": "Deletes a table",
+        "description": "",
+        "operationId": "deletetable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "table id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "table not found"
+          }
+        }
+      }
+    },
+    "/food_category": {
+      "post": {
+        "tags": [
+          "food_category"
+        ],
+        "summary": "Add a new food_category",
+        "description": "",
+        "operationId": "addfood_category",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "food_category object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/food_category"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "food_category"
+        ],
+        "summary": "Update an existing food_category",
+        "description": "",
+        "operationId": "updatefoodCategory",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "food_category object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/food_category"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "food_category not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/food_category/{foodCategoryId}": {
+      "get": {
+        "tags": [
+          "food_category"
+        ],
+        "summary": "Find food_category by ID",
+        "description": "Returns a single food_category",
+        "operationId": "getfood_categoryById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "foodCategoryId",
+            "in": "path",
+            "description": "ID of food_category to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/food_category"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "food_category not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "food_category"
+        ],
+        "summary": "Updates a food_category",
+        "description": "",
+        "operationId": "updatefoodCategoryForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "foodCategoryId",
+            "in": "path",
+            "description": "ID of food_category that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "food_category"
+        ],
+        "summary": "Deletes a food_category",
+        "description": "",
+        "operationId": "deletefood_category",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "foodCategoryId",
+            "in": "path",
+            "description": "foodCategoryId id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "foodCategory not found"
+          }
+        }
+      }
+    },
+    "/food_category/{foodCategoryId}/food_items": {
+      "get": {
+        "tags": [
+          "food_category"
+        ],
+        "summary": "Get all food_items  by foodCategoryId",
+        "description": "Returns all food_items  by foodCategoryId",
+        "operationId": "getAllFood_itemsId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "foodCategoryId",
+            "in": "path",
+            "description": "ID of food_category to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/food_item"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "food_category not found"
+          }
+        }
+      }
+    },
+    "/food_item": {
+      "post": {
+        "tags": [
+          "food_item"
+        ],
+        "summary": "Add a new food_item",
+        "description": "",
+        "operationId": "addfood_item",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "food_item object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/food_item"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "food_item"
+        ],
+        "summary": "Update an existing food_item",
+        "description": "",
+        "operationId": "updatefood_item",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "food_item object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/food_item"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "food_item not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/food_item/{fooditemId}": {
+      "get": {
+        "tags": [
+          "food_item"
+        ],
+        "summary": "Find food_item by ID",
+        "description": "Returns a single food_item",
+        "operationId": "getfood_itemById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "fooditemId",
+            "in": "path",
+            "description": "ID of food_item to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/food_item"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "food_item not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "food_item"
+        ],
+        "summary": "Updates a food_item",
+        "description": "",
+        "operationId": "updatefood_itemForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "fooditemId",
+            "in": "path",
+            "description": "ID of fooditem that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "food_item"
+        ],
+        "summary": "Deletes a food_item",
+        "description": "",
+        "operationId": "deletefood_item",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "fooditemId",
+            "in": "path",
+            "description": "fooditemId id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "fooditem not found"
+          }
+        }
+      }
+    },
+    "/menu": {
+      "post": {
+        "tags": [
+          "menu"
+        ],
+        "summary": "Add a new menu",
+        "description": "",
+        "operationId": "addmenu",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "menu object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/menu"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "menu"
+        ],
+        "summary": "Update an existing menu",
+        "description": "",
+        "operationId": "updatemenu",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "menu object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/menu"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "menu not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/menu/{menuId}": {
+      "get": {
+        "tags": [
+          "menu"
+        ],
+        "summary": "Find menu by ID",
+        "description": "Returns a single menu",
+        "operationId": "getmenuById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "menuId",
+            "in": "path",
+            "description": "ID of menu to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/menu"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "menu not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "menu"
+        ],
+        "summary": "Updates a menu",
+        "description": "",
+        "operationId": "updatemenuForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "menuId",
+            "in": "path",
+            "description": "ID of menu that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "menu"
+        ],
+        "summary": "Deletes a menu",
+        "description": "",
+        "operationId": "deletemenu",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "menuId",
+            "in": "path",
+            "description": "menu id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "menu not found"
+          }
+        }
+      }
+    },
+    "/menu_item_opt_slot": {
+      "post": {
+        "tags": [
+          "menu_item_opt_slot"
+        ],
+        "summary": "Add a new menu_item_opt_slot",
+        "description": "",
+        "operationId": "addmenu_item_opt_slot",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "menu_item_opt_slot object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/menu_item_opt_slot"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "menu_item_opt_slot"
+        ],
+        "summary": "Update an existing menu_item_opt_slot",
+        "description": "",
+        "operationId": "updatemenu_item_opt_slot",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "menu_item_opt_slot object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/menu_item_opt_slot"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "menu_item_opt_slot not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/menu_item_opt_slot/{menuitemoptslotId}": {
+      "get": {
+        "tags": [
+          "menu_item_opt_slot"
+        ],
+        "summary": "Find menu_item_opt_slot by ID",
+        "description": "Returns a single menu_item_opt_slot",
+        "operationId": "getmenu_item_opt_slotById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "menuitemoptslotId",
+            "in": "path",
+            "description": "ID of menuitemoptslot to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/menu_item_opt_slot"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "menu_item_opt_slot not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "menu_item_opt_slot"
+        ],
+        "summary": "Updates a menu_item_opt_slot",
+        "description": "",
+        "operationId": "updatemenu_item_opt_slotForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "menuitemoptslotId",
+            "in": "path",
+            "description": "ID of menuitemoptslot that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "menu_item_opt_slot"
+        ],
+        "summary": "Deletes a menu_item_opt_slot",
+        "description": "",
+        "operationId": "deletemenu_item_opt_slot",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "menuitemoptslotId",
+            "in": "path",
+            "description": "menuitemoptslot id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "menuitemoptslot not found"
+          }
+        }
+      }
+    },
+    "/operation_slot": {
+      "post": {
+        "tags": [
+          "operation_slot"
+        ],
+        "summary": "Add a new operation_slot",
+        "description": "",
+        "operationId": "addoperation_slot",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "operation_slot object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/operation_slot"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "operation_slot"
+        ],
+        "summary": "Update an existing operation_slot",
+        "description": "",
+        "operationId": "updateoperation_slot",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "operation_slot object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/operation_slot"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "operation_slot not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/operation_slot/{operationslotId}": {
+      "get": {
+        "tags": [
+          "operation_slot"
+        ],
+        "summary": "Find operationslot by ID",
+        "description": "Returns a single operationslotId",
+        "operationId": "getoperationslotById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "operationslotId",
+            "in": "path",
+            "description": "ID of operation_slot to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/operation_slot"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "operation_slot not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "operation_slot"
+        ],
+        "summary": "Updates a operation_slot",
+        "description": "",
+        "operationId": "updateoperation_slotForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "operationslotId",
+            "in": "path",
+            "description": "ID of operation_slot that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "operation_slot"
+        ],
+        "summary": "Deletes a operation_slot",
+        "description": "",
+        "operationId": "deleteoperation_slot",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "operationslotId",
+            "in": "path",
+            "description": "operation_slot id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "operation_slot not found"
+          }
+        }
+      }
+    },
+    "/operation_slot/{operationslotId}/menus": {
+      "get": {
+        "tags": [
+          "operation_slot"
+        ],
+        "summary": "Get all menus  by operation_slot",
+        "description": "Returns menus",
+        "operationId": "getAlloperation_slotId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "operationslotId",
+            "in": "path",
+            "description": "ID of operationslot to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/menu"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "operationslot not found"
+          }
+        }
+      }
+    },
+    "/operation_slot/{operationslotId}/food_categories": {
+      "get": {
+        "tags": [
+          "operation_slot"
+        ],
+        "summary": "Get all food_categories  by operation_slot",
+        "description": "Returns food_categories",
+        "operationId": "getAllfood_categoriesId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "operationslotId",
+            "in": "path",
+            "description": "ID of operationslot to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/food_category"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "operationslot not found"
+          }
+        }
+      }
+    },
+    "/choices_category": {
+      "post": {
+        "tags": [
+          "choices_category"
+        ],
+        "summary": "Add a new choices_category",
+        "description": "",
+        "operationId": "addchoices_category",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "choices_category object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/choices_category"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "choices_category"
+        ],
+        "summary": "Update an existing choices_category",
+        "description": "",
+        "operationId": "updatechoices_category",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "choices_category object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/choices_category"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "choices_category not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/choices_category/{choicescategoryId}": {
+      "get": {
+        "tags": [
+          "choices_category"
+        ],
+        "summary": "Find choices_category by ID",
+        "description": "Returns a single choices_category",
+        "operationId": "getchoices_categoryById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "choicescategoryId",
+            "in": "path",
+            "description": "ID of choices_category to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/choices_category"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "choices_category not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "choices_category"
+        ],
+        "summary": "Updates a choices_category",
+        "description": "",
+        "operationId": "updatechoices_categoryForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "choicescategoryId",
+            "in": "path",
+            "description": "ID of choices_category that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "choices_category"
+        ],
+        "summary": "Deletes a choices_category",
+        "description": "",
+        "operationId": "deletechoices_category",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "choicescategoryId",
+            "in": "path",
+            "description": "choicescategory id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "choices_category not found"
+          }
+        }
+      }
+    },
+    "/choices_category/{choicescategoryId}/choices_items": {
+      "get": {
+        "tags": [
+          "choices_category"
+        ],
+        "summary": "Get all choices_item  by choicescategoryId",
+        "description": "Returns all choices_item  by choicescategoryId",
+        "operationId": "getAllchoices_itemsId",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "choicescategoryId",
+            "in": "path",
+            "description": "ID of choices_category to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/choices_item"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "choices_category not found"
+          }
+        }
+      }
+    },
+    "/choices_item": {
+      "post": {
+        "tags": [
+          "choices_item"
+        ],
+        "summary": "Add a new choices_item",
+        "description": "",
+        "operationId": "addchoices_item",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "choices_item object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/choices_item"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "choices_item"
+        ],
+        "summary": "Update an existing choices_item",
+        "description": "",
+        "operationId": "updatechoices_item",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "choices_item object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/choices_item"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "choices_item not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/choices_item/{choicesitemId}": {
+      "get": {
+        "tags": [
+          "choices_item"
+        ],
+        "summary": "Find choices_item by ID",
+        "description": "Returns a single choices_item",
+        "operationId": "getchoices_itemById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "choicesitemId",
+            "in": "path",
+            "description": "ID of choicesitem to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/choices_item"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "choices_item not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "choices_item"
+        ],
+        "summary": "Updates a choices_item",
+        "description": "",
+        "operationId": "updatechoices_itemForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "choicesitemId",
+            "in": "path",
+            "description": "ID of choices_item that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "choices_item"
+        ],
+        "summary": "Deletes a choices_item",
+        "description": "",
+        "operationId": "deletechoices_item",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "choicesitemId",
+            "in": "path",
+            "description": "choicesitem id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "choicesitem not found"
+          }
+        }
+      }
+    },
+    "/choices_item_opt_slot": {
+      "post": {
+        "tags": [
+          "choices_item_opt_slot"
+        ],
+        "summary": "Add a new choices_item_opt_slot",
+        "description": "",
+        "operationId": "addchoices_item_opt_slot",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "choices_item_opt_slot object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/choices_item_opt_slot"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "choices_item_opt_slot"
+        ],
+        "summary": "Update an existing choices_item_opt_slot",
+        "description": "",
+        "operationId": "updatechoices_item_opt_slot",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "choices_item_opt_slot object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/choices_item_opt_slot"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "choices_item_opt_slot not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/choices_item_opt_slot/{choicesitemoptslotId}": {
+      "get": {
+        "tags": [
+          "choices_item_opt_slot"
+        ],
+        "summary": "Find menu by ID",
+        "description": "Returns a single choices_item_opt_slot",
+        "operationId": "getchoices_item_opt_slotById",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "choicesitemoptslotId",
+            "in": "path",
+            "description": "ID of choicesitemoptslot to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/choices_item_opt_slot"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "choices_item_opt_slot not found"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "choices_item_opt_slot"
+        ],
+        "summary": "Updates a choices_item_opt_slot",
+        "description": "",
+        "operationId": "updatechoices_item_opt_slotForm",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/xml",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "choicesitemoptslotId",
+            "in": "path",
+            "description": "ID of choicesitemoptslot that needs to be updated",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "choices_item_opt_slot"
+        ],
+        "summary": "Deletes a choices_item_opt_slot",
+        "description": "",
+        "operationId": "deletechoices_item_opt_slot",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "choicesitemoptslotId",
+            "in": "path",
+            "description": "choicesitemoptslot id to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "choicesitemoptslot not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "company": {
+      "type": "object",
+      "required": [
+        "name",
+        "email"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "example": "xyz"
+        },
+        "address": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "allowable_branches": {
+          "type": "integer"
+        }
+      },
+      "xml": {
+        "name": "company"
+      }
+    },
+    "branch": {
+      "type": "object",
+      "required": [
+        "name",
+        "email"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "example": "xyz"
+        },
+        "company_id": {
+          "type": "integer"
+        },
+        "address": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "status": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "branch"
+      }
+    },
+    "kitchen": {
+      "type": "object",
+      "required": [
+        "name",
+        "email"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "company_id": {
+          "type": "integer"
+        },
+        "branch_id": {
+          "type": "integer"
+        }
+      },
+      "xml": {
+        "name": "kitchen"
+      }
+    },
+    "food_category": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "object"
+        },
+        "company_id": {
+          "type": "integer"
+        },
+        "parent_id": {
+          "type": "integer"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "food_category"
+      }
+    },
+    "food_item": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "Ingredients": {
+          "type": "string"
+        },
+        "photo": {
+          "type": "object"
+        },
+        "properties": {
+          "type": "string"
+        },
+        "prepare_duration": {
+          "type": "integer"
+        },
+        "nutrition_info": {
+          "type": "string"
+        },
+        "allergy_info": {
+          "type": "string"
+        },
+        "Is_veg": {
+          "type": "boolean"
+        },
+        "Is_halal": {
+          "type": "boolean"
+        },
+        "Is_alcohol_added": {
+          "type": "boolean"
+        },
+        "Is_kid_item": {
+          "type": "boolean"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "food_item"
+      }
+    },
+    "choices_category": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "company_id": {
+          "type": "integer"
+        },
+        "parent_id": {
+          "type": "integer"
+        },
+        "is_multivalued": {
+          "type": "boolean"
+        },
+        "is_required": {
+          "type": "boolean"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "choices_categories"
+      }
+    },
+    "choices_item": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "choices_category_id": {
+          "type": "integer"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "choices_item"
+      }
+    },
+    "choices_item_opt_slot": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "menu_id": {
+          "type": "integer"
+        },
+        "choices_category_id": {
+          "type": "integer"
+        },
+        "food_item_id": {
+          "type": "integer"
+        },
+        "choices_item_id": {
+          "type": "integer"
+        },
+        "opt_slot_id": {
+          "type": "integer"
+        },
+        "price": {
+          "type": "number"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "choices_item_opt_slot"
+      }
+    },
+    "operation_slot": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "start_time": {
+          "type": "string"
+        },
+        "end_time": {
+          "type": "string"
+        },
+        "company_id": {
+          "type": "string"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "operation_slot"
+      }
+    },
+    "menu": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "company_id": {
+          "type": "string"
+        },
+        "branch_id": {
+          "type": "string"
+        },
+        "is_package": {
+          "type": "boolean"
+        },
+        "package_price": {
+          "type": "number"
+        },
+        "is_time_bound": {
+          "type": "boolean"
+        },
+        "time_bound_duration": {
+          "type": "integer"
+        },
+        "package_discount_percentage": {
+          "type": "integer"
+        },
+        "last_time_to_order": {
+          "type": "string"
+        },
+        "reminder_time": {
+          "type": "string"
+        },
+        "Is_published": {
+          "type": "boolean"
+        },
+        "menu_type": {
+          "type": "string"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "menu"
+      }
+    },
+    "menu_item_opt_slot": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "menu_id": {
+          "type": "integer"
+        },
+        "food_category_id": {
+          "type": "integer"
+        },
+        "food_item_id": {
+          "type": "integer"
+        },
+        "opt_slot_id": {
+          "type": "integer"
+        },
+        "price": {
+          "type": "number"
+        },
+        "max_discount_percentage": {
+          "type": "integer"
+        },
+        "is_active": {
+          "type": "boolean"
+        }
+      },
+      "xml": {
+        "name": "menu_item_opt_slot"
+      }
+    },
+    "table": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "no_of_seats": {
+          "type": "integer"
+        },
+        "table_code": {
+          "type": "string"
+        },
+        "table_no": {
+          "type": "string"
+        },
+        "company_id": {
+          "type": "string"
+        },
+        "branch_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "table"
+      }
+    },
+    "sale": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "date": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number"
+        },
+        "menu_id": {
+          "type": "integer"
+        },
+        "table_no": {
+          "type": "string"
+        },
+        "company_id": {
+          "type": "string"
+        },
+        "branch_id": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "xml": {
+        "name": "sale"
+      }
+    },
+    "ApiResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

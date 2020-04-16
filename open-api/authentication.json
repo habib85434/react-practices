@@ -1,0 +1,351 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Authentication Swagger",
+    "description": "Login, logout and reset_password APIs",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/session": {
+      "post": {
+        "tags": [
+          "Session"
+        ],
+        "summary": "Create user session (Login)",
+        "description": "This is for the logged in user.",
+        "operationId": "createSession",
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "description": "User Name"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "User Password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid username supplied",
+            "content": {}
+          },
+          "404": {
+            "description": "User not found",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Session"
+        ],
+        "summary": "Create user session (Login)",
+        "description": "This is for the logged in user.",
+        "operationId": "updateSession",
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "description": "User Name"
+                  },
+                  "token": {
+                    "type": "string",
+                    "description": "User Password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid token or userId supplied",
+            "content": {}
+          },
+          "404": {
+            "description": "Valid token not found",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      },
+      "delete": {
+        "tags": [
+          "Session"
+        ],
+        "summary": "Logout (Delete session)",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "deleteSession",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "description": "The token that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful Logout",
+            "content": {}
+          },
+          "400": {
+            "description": "Invalid token supplied",
+            "content": {}
+          },
+          "404": {
+            "description": "Token not found",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    },
+    "/user/{username}/resetPassword": {
+      "post": {
+        "tags": [
+          "Reset Password"
+        ],
+        "summary": "reset password link",
+        "description": "This is for the user password reset. The api send an email to the user email with a reset link. user need to browse the link to reset.",
+        "operationId": "resetPasswordLinkCreate",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "User name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful",
+            "content": {}
+          },
+          "400": {
+            "description": "Invalid username supplied",
+            "content": {}
+          },
+          "404": {
+            "description": "User not found",
+            "content": {}
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Reset Password"
+        ],
+        "summary": "Reset user password",
+        "description": "To reset password",
+        "operationId": "resetPassword",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "description": "User name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "*/*": {
+              "schema": {
+                "properties": {
+                  "resetCode": {
+                    "type": "string",
+                    "description": "Valid Reset code"
+                  },
+                  "password": {
+                    "type": "string",
+                    "description": "User Password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Re-set code or userId supplied",
+            "content": {}
+          },
+          "404": {
+            "description": "Valid code not found",
+            "content": {}
+          }
+        },
+        "x-codegen-request-body-name": "body"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Session": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "UserName": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "tableCode": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          },
+          "user": {
+            "type": "object",
+            "properties": {}
+          }
+        },
+        "xml": {
+          "name": "Session"
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "dob": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "User"
+        }
+      },
+      "ResetPassword": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "resetCode": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "resetUrl": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "ResetPassword"
+        }
+      },
+      "Permission": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Permission"
+        }
+      }
+    }
+  }
+}
